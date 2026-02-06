@@ -1,0 +1,123 @@
+name: Build Agent v2
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Agent v2 for Multiple Platforms
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build core agent
+        run: |
+          echo "Building core agent for all platforms..."
+          npx pkg lib/start.js \
+            --targets node18-win-x64,node18-linux-x64,node18-macos-x64 \
+            --output dist/EverydayTechAgent-v2
+      
+      - name: Build Windows helpers
+        run: node scripts/build-helpers.js win32
+      
+      - name: Build Linux helpers
+        run: node scripts/build-helpers.js linux
+      
+      - name: Build macOS helpers
+        run: node scripts/build-helpers.js darwin
+      
+      - name: Create distribution packages
+        run: node scripts/package.js
+      
+      - name: List build artifacts
+        run: |
+          echo "Core executables:"
+          ls -lh dist/EverydayTechAgent-v2*
+          echo ""
+          echo "Helpers:"
+          ls -lh dist/helpers/ || true
+          echo ""
+          echo "Packages:"
+          ls -lh dist/*.zip dist/*.tar.gz 2>/dev/null || true
+      
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-v2-windows
+          path: |
+            dist/EverydayTechAgent-v2-win*
+            dist/helpers/win32/**
+          retention-days: 30
+      
+      - name: Upload Linux build
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-v2-linux
+          path: |
+            dist/EverydayTechAgent-v2-linux*
+            dist/helpers/linux/**
+          retention-days: 30
+      
+      - name: Upload macOS build
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-v2-macos
+          path: |
+            dist/EverydayTechAgent-v2-macos*
+            dist/helpers/darwin/**
+          retention-days: 30
+      
+      - name: Upload distribution packages
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-v2-packages
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+          retention-days: 30
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/**/*.exe
+            artifacts/**/*.zip
+            artifacts/**/*.tar.gz
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
