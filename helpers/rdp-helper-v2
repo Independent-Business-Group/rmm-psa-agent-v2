@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+// Simple test RDP helper for development
+const action = process.argv[2] || 'status';
+
+const responses = {
+  '--version': {
+    success: true,
+    message: 'RDP Helper v2.0.0 (Development)',
+    version: '2.0.0'
+  },
+  'status': {
+    success: true,
+    message: 'RDP status retrieved',
+    data: {
+      enabled: false,
+      serviceRunning: false,
+      portOpen: false,
+      port: 3389,
+      protocol: 'rdp',
+      ready: false
+    }
+  },
+  'enable': {
+    success: true,
+    message: 'RDP enabled successfully (simulated)',
+    data: { port: 3389, enabled: true }
+  },
+  'disable': {
+    success: true,
+    message: 'RDP disabled successfully (simulated)'
+  },
+  'test': {
+    success: false,
+    error: 'Connection test failed (development mode)'
+  }
+};
+
+const response = responses[action] || {
+  success: false,
+  error: `Unknown action: ${action}`
+};
+
+console.log(JSON.stringify(response, null, 2));
+process.exit(response.success ? 0 : 1);

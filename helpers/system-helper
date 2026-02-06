@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+// Simple test system helper for development
+const os = require('os');
+const action = process.argv[2] || 'info';
+
+const responses = {
+  '--version': {
+    success: true,
+    message: 'System Helper v2.0.0 (Development)',
+    version: '2.0.0'
+  },
+  'info': {
+    success: true,
+    message: 'System information collected',
+    data: {
+      platform: os.platform(),
+      arch: os.arch(),
+      hostname: os.hostname(),
+      uptime: os.uptime(),
+      memory: {
+        total: os.totalmem(),
+        free: os.freemem()
+      },
+      cpus: os.cpus().length,
+      development: true
+    }
+  },
+  'exec': {
+    success: true,
+    message: 'Command executed successfully (simulated)',
+    output: 'Simulated command output'
+  }
+};
+
+const response = responses[action] || {
+  success: false,
+  error: `Unknown action: ${action}`
+};
+
+console.log(JSON.stringify(response, null, 2));
+process.exit(response.success ? 0 : 1);

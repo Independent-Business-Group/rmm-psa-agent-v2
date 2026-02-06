@@ -1,0 +1,27 @@
+[2026-01-16T05:16:19.091Z] [ERROR] [agent-v2] Helper failed after 4 attempts: rdp-helper-v2
+[2026-01-16T05:16:25.097Z] [ERROR] [agent-v2] Helper failed after 4 attempts: system-helper
+[2026-01-16T05:16:31.104Z] [ERROR] [agent-v2] Helper failed after 4 attempts: update-helper
+[2026-01-16T05:16:46.514Z] [ERROR] [agent-v2] WebSocket error: Unexpected server response: 502
+Error: Unexpected server response: 502
+    at ClientRequest.<anonymous> (/home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/node_modules/ws/lib/websocket.js:918:7)
+    at ClientRequest.emit (node:events:519:28)
+    at HTTPParser.parserOnIncomingClient (node:_http_client:716:27)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:121:17)
+    at TLSSocket.socketOnData (node:_http_client:558:22)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23)
+[2026-01-16T06:12:17.417Z] [ERROR] [agent-v2] WebSocket error: Unexpected server response: 502
+Error: Unexpected server response: 502
+    at ClientRequest.<anonymous> (/home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/node_modules/ws/lib/websocket.js:918:7)
+    at ClientRequest.emit (node:events:519:28)
+    at HTTPParser.parserOnIncomingClient (node:_http_client:716:27)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:121:17)
+    at TLSSocket.socketOnData (node:_http_client:558:22)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23)

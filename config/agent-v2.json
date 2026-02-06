@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "agentId": "359e1704-f8b1-4679-a7ff-4699ff5758b4",
+  "backendUrl": "https://everydaytech.au/api",
+  "websocketUrl": "wss://everydaytech.au/api/agent/ws",
+  "updateInterval": 60000,
+  "heartbeatInterval": 30000,
+  "logLevel": "info",
+  "enableHelpers": true,
+  "helpers": {
+    "timeout": 30000,
+    "retryAttempts": 2,
+    "enabled": [
+      "rdp-helper",
+      "system-helper",
+      "update-helper"
+    ]
+  },
+  "plugins": {
+    "autoLoad": true,
+    "enabled": []
+  },
+  "security": {
+    "encryptCommunication": true,
+    "allowRemoteExecution": true,
+    "allowSystemModifications": false
+  },
+  "features": {
+    "remoteDesktop": true,
+    "systemInfo": true,
+    "processManagement": true,
+    "fileTransfer": true,
+    "softwareInventory": true
+  }
+}

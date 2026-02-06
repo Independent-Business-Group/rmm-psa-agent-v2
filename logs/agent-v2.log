@@ -1,0 +1,95 @@
+[2026-01-16T05:16:13.081Z] [INFO] [agent-v2] 🚀 Starting EverydayTech Agent v2...
+[2026-01-16T05:16:13.082Z] [INFO] [agent-v2] Platform: linux, Architecture: x64
+[2026-01-16T05:16:13.082Z] [WARN] [agent-v2] Failed to load config, using defaults: Configuration file not found
+[2026-01-16T05:16:13.083Z] [INFO] [agent-v2] Agent ID: 359e1704-f8b1-4679-a7ff-4699ff5758b4
+[2026-01-16T05:16:13.083Z] [INFO] [agent-v2] Initializing IPC manager...
+[2026-01-16T05:16:13.083Z] [INFO] [agent-v2] Initializing IPC Manager...
+[2026-01-16T05:16:13.084Z] [INFO] [agent-v2] IPC Manager initialized. Helpers path: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers
+[2026-01-16T05:16:13.084Z] [INFO] [agent-v2] Testing helper availability...
+[2026-01-16T05:16:13.084Z] [WARN] [agent-v2] Helper attempt 1 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/rdp-helper-v2
+[2026-01-16T05:16:14.086Z] [WARN] [agent-v2] Helper attempt 2 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/rdp-helper-v2
+[2026-01-16T05:16:16.088Z] [WARN] [agent-v2] Helper attempt 3 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/rdp-helper-v2
+[2026-01-16T05:16:19.091Z] [ERROR] [agent-v2] Helper failed after 4 attempts: rdp-helper-v2
+[2026-01-16T05:16:19.091Z] [WARN] [agent-v2] ⚠️  rdp-helper-v2: Not available - Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/rdp-helper-v2
+[2026-01-16T05:16:19.091Z] [WARN] [agent-v2] Helper attempt 1 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/system-helper
+[2026-01-16T05:16:20.092Z] [WARN] [agent-v2] Helper attempt 2 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/system-helper
+[2026-01-16T05:16:22.093Z] [WARN] [agent-v2] Helper attempt 3 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/system-helper
+[2026-01-16T05:16:25.097Z] [ERROR] [agent-v2] Helper failed after 4 attempts: system-helper
+[2026-01-16T05:16:25.097Z] [WARN] [agent-v2] ⚠️  system-helper: Not available - Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/system-helper
+[2026-01-16T05:16:25.097Z] [WARN] [agent-v2] Helper attempt 1 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/update-helper
+[2026-01-16T05:16:26.098Z] [WARN] [agent-v2] Helper attempt 2 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/update-helper
+[2026-01-16T05:16:28.100Z] [WARN] [agent-v2] Helper attempt 3 failed, retrying: Helper not found: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers/update-helper
+[2026-01-16T05:16:31.104Z] [ERROR] [agent-v2] Helper failed after 4 attempts: update-helper
+[2026-01-16T05:16:46.213Z] [INFO] [agent-v2] 🚀 Starting EverydayTech Agent v2...
+[2026-01-16T05:16:46.214Z] [INFO] [agent-v2] Platform: linux, Architecture: x64
+[2026-01-16T05:16:46.215Z] [INFO] [agent-v2] Configuration loaded from: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/config/agent-v2.json
+[2026-01-16T05:16:46.215Z] [INFO] [agent-v2] Agent ID: 359e1704-f8b1-4679-a7ff-4699ff5758b4
+[2026-01-16T05:16:46.215Z] [INFO] [agent-v2] Initializing IPC manager...
+[2026-01-16T05:16:46.216Z] [INFO] [agent-v2] Initializing IPC Manager...
+[2026-01-16T05:16:46.216Z] [INFO] [agent-v2] IPC Manager initialized. Helpers path: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers
+[2026-01-16T05:16:46.216Z] [INFO] [agent-v2] Testing helper availability...
+[2026-01-16T05:16:46.273Z] [INFO] [agent-v2] ✅ rdp-helper-v2: Available
+[2026-01-16T05:16:46.329Z] [INFO] [agent-v2] ✅ system-helper: Available
+[2026-01-16T05:16:46.384Z] [INFO] [agent-v2] ✅ update-helper: Available
+[2026-01-16T05:16:46.384Z] [INFO] [agent-v2] Helper availability: 3/3 available
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Loading plugin system...
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Loading 1 plugins...
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Guacamole Plugin v2 initialized
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] ✅ Plugin loaded: guacamole
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Loaded 1 plugins successfully
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Connecting to backend...
+[2026-01-16T05:16:46.385Z] [INFO] [agent-v2] Connecting to WebSocket: wss://everydaytech.au/api/agent/ws
+[2026-01-16T05:16:46.395Z] [INFO] [agent-v2] Starting heartbeat (30000ms interval)
+[2026-01-16T05:16:46.395Z] [INFO] [agent-v2] ✅ Agent v2 started successfully
+[2026-01-16T05:16:46.395Z] [INFO] [agent-v2] Helpers available: rdp-helper-v2, system-helper, update-helper
+[2026-01-16T05:16:46.395Z] [INFO] [agent-v2] Plugins loaded: 
+[2026-01-16T05:16:46.514Z] [ERROR] [agent-v2] WebSocket error: Unexpected server response: 502
+Error: Unexpected server response: 502
+    at ClientRequest.<anonymous> (/home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/node_modules/ws/lib/websocket.js:918:7)
+    at ClientRequest.emit (node:events:519:28)
+    at HTTPParser.parserOnIncomingClient (node:_http_client:716:27)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:121:17)
+    at TLSSocket.socketOnData (node:_http_client:558:22)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23)
+[2026-01-16T06:11:46.886Z] [INFO] [test] Configuration loaded from: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/config/agent-v2.json
+[2026-01-16T06:11:46.887Z] [INFO] [test] Initializing IPC Manager...
+[2026-01-16T06:11:46.887Z] [INFO] [test] IPC Manager initialized. Helpers path: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers
+[2026-01-16T06:12:17.136Z] [INFO] [agent-v2] 🚀 Starting EverydayTech Agent v2...
+[2026-01-16T06:12:17.137Z] [INFO] [agent-v2] Platform: linux, Architecture: x64
+[2026-01-16T06:12:17.138Z] [INFO] [agent-v2] Configuration loaded from: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/config/agent-v2.json
+[2026-01-16T06:12:17.138Z] [INFO] [agent-v2] Agent ID: 359e1704-f8b1-4679-a7ff-4699ff5758b4
+[2026-01-16T06:12:17.139Z] [INFO] [agent-v2] Initializing IPC manager...
+[2026-01-16T06:12:17.139Z] [INFO] [agent-v2] Initializing IPC Manager...
+[2026-01-16T06:12:17.139Z] [INFO] [agent-v2] IPC Manager initialized. Helpers path: /home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/helpers
+[2026-01-16T06:12:17.139Z] [INFO] [agent-v2] Testing helper availability...
+[2026-01-16T06:12:17.200Z] [INFO] [agent-v2] ✅ rdp-helper-v2: Available
+[2026-01-16T06:12:17.255Z] [INFO] [agent-v2] ✅ system-helper: Available
+[2026-01-16T06:12:17.314Z] [INFO] [agent-v2] ✅ update-helper: Available
+[2026-01-16T06:12:17.314Z] [INFO] [agent-v2] Helper availability: 3/3 available
+[2026-01-16T06:12:17.314Z] [INFO] [agent-v2] Loading plugin system...
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] Loading 1 plugins...
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] Guacamole Plugin v2 initialized
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] ✅ Plugin loaded: guacamole
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] Loaded 1 plugins successfully
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] Connecting to backend...
+[2026-01-16T06:12:17.315Z] [INFO] [agent-v2] Connecting to WebSocket: wss://everydaytech.au/api/agent/ws
+[2026-01-16T06:12:17.325Z] [INFO] [agent-v2] Starting heartbeat (30000ms interval)
+[2026-01-16T06:12:17.325Z] [INFO] [agent-v2] ✅ Agent v2 started successfully
+[2026-01-16T06:12:17.325Z] [INFO] [agent-v2] Helpers available: rdp-helper-v2, system-helper, update-helper
+[2026-01-16T06:12:17.325Z] [INFO] [agent-v2] Plugins loaded: 
+[2026-01-16T06:12:17.417Z] [ERROR] [agent-v2] WebSocket error: Unexpected server response: 502
+Error: Unexpected server response: 502
+    at ClientRequest.<anonymous> (/home/cw/Documents/IBG_HUB/rmm-psa-platform/agent-v2/node_modules/ws/lib/websocket.js:918:7)
+    at ClientRequest.emit (node:events:519:28)
+    at HTTPParser.parserOnIncomingClient (node:_http_client:716:27)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:121:17)
+    at TLSSocket.socketOnData (node:_http_client:558:22)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23)

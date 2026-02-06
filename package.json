@@ -1,0 +1,91 @@
+{
+  "name": "agent-v2",
+  "version": "2.0.0",
+  "description": "EverydayOffice Agent v2 - Helper-Based Architecture",
+  "main": "lib/start.js",
+  "scripts": {
+    "build": "npm run build:core && npm run build:helpers",
+    "build:core": "BUILD_MODE=true npx pkg lib/start.js --targets node18-linux-x64,node18-win-x64,node18-macos-x64 --output dist/EverydayTechAgent-v2",
+    "build:helpers": "npm run build:helpers:win && npm run build:helpers:linux",
+    "build:helpers:win": "node scripts/build-helpers.js win32",
+    "build:helpers:linux": "node scripts/build-helpers.js linux",
+    "build:all": "npm run build && npm run package",
+    "package": "node scripts/package.js",
+    "start": "node lib/start.js",
+    "test": "npm run test:core && npm run test:helpers",
+    "test:core": "node test/core.test.js",
+    "test:helpers": "node test/helpers.test.js",
+    "dev": "node lib/start.js --dev",
+    "install-service": "node scripts/install-service.js",
+    "uninstall-service": "node scripts/uninstall-service.js"
+  },
+  "keywords": [
+    "agent",
+    "rmm",
+    "psa",
+    "everydayoffice",
+    "v2",
+    "helper-architecture"
+  ],
+  "author": "Martin Fenwick",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "node-windows": "^1.0.0-beta.8",
+    "winston": "^3.18.3",
+    "ws": "^8.18.3",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "lib/**/*.js",
+      "lib/**/*.json",
+      "plugins/**/*.js",
+      "plugins/**/*.json",
+      "src/**/*.js",
+      "config/**/*.json",
+      "helpers/**/*.js",
+      "scripts/**/*.js"
+    ],
+    "scripts": [
+      "lib/start.js",
+      "lib/core.js",
+      "lib/ipc/*.js",
+      "lib/logger.js",
+      "lib/updater.js"
+    ],
+    "targets": [
+      "node18-linux-x64",
+      "node18-win-x64",
+      "node18-macos-x64"
+    ]
+  },
+  "agent": {
+    "version": "2.0.0",
+    "architecture": "helper-based",
+    "features": {
+      "helpers": true,
+      "ipc": true,
+      "privilege-separation": true,
+      "plugin-system": true,
+      "auto-update": true,
+      "remote-desktop": true,
+      "system-management": true
+    },
+    "helpers": [
+      "rdp-helper",
+      "system-helper", 
+      "update-helper",
+      "vnc-helper",
+      "rustdesk-helper"
+    ],
+    "platforms": [
+      "win32",
+      "linux",
+      "darwin"
+    ]
+  }
+}
