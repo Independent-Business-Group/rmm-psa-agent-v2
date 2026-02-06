@@ -123,15 +123,25 @@ jobs:
         with:
           path: artifacts
       
+      - name: List downloaded artifacts
+        run: |
+          echo "Downloaded artifacts:"
+          find artifacts -type f -ls
+      
+      - name: Prepare release files
+        run: |
+          mkdir -p release-files
+          find artifacts -type f \( -name "*.exe" -o -name "*.zip" -o -name "*.tar.gz" \) -exec cp {} release-files/ \;
+          echo "Release files:"
+          ls -lh release-files/
+      
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          files: |
-            artifacts/**/*.exe
-            artifacts/**/*.zip
-            artifacts/**/*.tar.gz
+          files: release-files/*
           draft: false
           prerelease: false
           generate_release_notes: true
+          fail_on_unmatched_files: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
