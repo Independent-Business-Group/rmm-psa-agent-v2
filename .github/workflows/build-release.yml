@@ -31,8 +31,15 @@ jobs:
           npm install
           npm install -g pkg
       
-      - name: Create dist directory
-        run: mkdir -p dist/helpers
+      - name: Prepare dist directory
+        run: |
+          # Save install.bat from repository before cleaning dist
+          cp dist/install.bat /tmp/install.bat 2>/dev/null || echo "No install.bat in dist/"
+          # Clean and recreate dist
+          rm -rf dist/*
+          mkdir -p dist/helpers
+          # Restore install.bat for packaging
+          cp /tmp/install.bat dist/install.bat 2>/dev/null || echo "Using package.js generated install.bat"
       
       - name: Build core agent
         run: |
