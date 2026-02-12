@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "16"
 
       - name: Install dependencies
         run: |
@@ -45,7 +45,7 @@ jobs:
         run: |
           echo "Building core agent for all platforms..."
           pkg lib/start.js \
-            --targets node18-win-x64,node18-linux-x64,node18-macos-x64 \
+            --targets node16-win-x64,node16-linux-x64,node16-macos-x64 \
             --output dist/EverydayTechAgent-v2
 
       - name: Build helpers
@@ -78,7 +78,7 @@ jobs:
             cd ..
             ls -lh agent-v2-windows-deployment.zip
           fi
-          
+
           # Copy bootstrap installer to root for standalone download
           cp bootstrap-install.bat . 2>/dev/null || echo "No bootstrap installer"
 
