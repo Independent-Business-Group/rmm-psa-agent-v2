@@ -21,7 +21,9 @@ class UpdateHelperV2 {
     this.arch = os.arch();
     this.logFile = this.getLogPath();
     
-    this.updateUrl = 'https://everydaytech.au/api/agent/updates';
+    // Check GitHub directly for updates (public repo)
+    this.githubRepo = 'Independent-Business-Group/rmm-psa-agent-v2';
+    this.updateUrl = `https://api.github.com/repos/${this.githubRepo}/releases/latest`;
     this.tempDir = this.getTempDir();
     this.backupDir = this.getBackupDir();
     
