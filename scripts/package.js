@@ -66,25 +66,23 @@ async function createPackage(platform) {
   
   // Add installation scripts based on platform
   if (platform === 'win32') {
-    // Add Windows installer script
-    archive.append(`@echo off
+    // Add Windows installer script from dist/install.bat
+    const installBatPath = path.join(distDir, 'install.bat');
+    if (fs.existsSync(installBatPath)) {
+      archive.file(installBatPath, { name: 'install.bat' });
+    } else {
+      console.warn('⚠️  install.bat not found, using default');
+      archive.append(`@echo off
 :: Install EverydayTech Agent v2
-
 echo Installing EverydayTech Agent v2...
-
-:: Copy files
 xcopy /Y /S bin\\* "C:\\Program Files\\EverydayTech\\Agent\\"
 xcopy /Y /S helpers\\* "C:\\Program Files\\EverydayTech\\Agent\\helpers\\"
-
-:: Install service
 "C:\\Program Files\\EverydayTech\\Agent\\EverydayTechAgent-v2.exe" --install-service
-
-:: Start service
 net start "EverydayTech Agent v2"
-
 echo Installation completed!
 pause
 `, { name: 'install.bat' });
+    }
   } else {
     // Add Unix installer script
     archive.append(`#!/bin/bash
