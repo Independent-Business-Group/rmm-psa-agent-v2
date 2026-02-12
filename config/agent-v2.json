@@ -1,8 +1,8 @@
 {
   "version": "2.0.0",
   "agentId": "359e1704-f8b1-4679-a7ff-4699ff5758b4",
-  "backendUrl": "https://everydaytech.au/api",
-  "websocketUrl": "wss://everydaytech.au/api/agent/ws",
+  "backendUrl": "https://rmm-psa-backend-t9f7k.ondigitalocean.app/api",
+  "websocketUrl": "wss://rmm-psa-backend-t9f7k.ondigitalocean.app/api/agent/ws",
   "updateInterval": 60000,
   "heartbeatInterval": 30000,
   "logLevel": "info",

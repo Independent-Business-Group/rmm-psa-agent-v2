@@ -65,8 +65,8 @@ if not exist "C:\ProgramData\EverydayTech\config\agent-v2.json" (
     (
         echo {
         echo   "version": "2.0.0",
-        echo   "backendUrl": "https://everydaytech.au/api",
-        echo   "websocketUrl": "wss://everydaytech.au/api/agent/ws",
+        echo   "backendUrl": "https://rmm-psa-backend-t9f7k.ondigitalocean.app/api",
+        echo   "websocketUrl": "wss://rmm-psa-backend-t9f7k.ondigitalocean.app/api/agent/ws",
         echo   "logLevel": "info",
         echo   "helpers": {
         echo     "timeout": 30000,
@@ -127,7 +127,7 @@ echo Status: Running
 echo Config: C:\ProgramData\EverydayTech\config\agent-v2.json
 echo Logs: C:\ProgramData\EverydayTech\logs\agent-v2.log
 echo.
-echo The agent will automatically connect to https://everydaytech.au/api
+echo The agent will automatically connect to https://rmm-psa-backend-t9f7k.ondigitalocean.app/api
 echo Check the dashboard to see this agent appear
 echo.
 pause
