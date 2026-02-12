@@ -60,15 +60,25 @@ jobs:
 
       - name: Create distribution packages
         run: |
-          if [ -f scripts/package.js ]; then
-            node scripts/package.js || echo "Package script failed, continuing"
-          else
-            echo "Package script not found, creating simple archives"
-            cd dist
-            zip -r agent-v2-windows.zip EverydayTechAgent-v2-win.exe helpers/win32 2>/dev/null || true
-            tar -czf agent-v2-linux.tar.gz EverydayTechAgent-v2-linux helpers/linux 2>/dev/null || true
-            tar -czf agent-v2-macos.tar.gz EverydayTechAgent-v2-macos helpers/darwin 2>/dev/null || true
+          # Create deployment package with installer scripts
+          cd dist
+          mkdir -p deployment
+          
+          # Copy Windows deployment files
+          if [ -f EverydayTechAgent-v2-win.exe ]; then
+            cp EverydayTechAgent-v2-win.exe deployment/
+            cp -r helpers deployment/ 2>/dev/null || echo "No helpers to copy"
+            cp install.bat deployment/ 2>/dev/null || echo "No install.bat"
+            cp install-service.bat deployment/ 2>/dev/null || echo "No install-service.bat"
+            cp test.bat deployment/ 2>/dev/null || echo "No test.bat"
+            
+            # Create deployment zip
+            cd deployment
+            zip -r ../agent-v2-windows-deployment.zip .
+            cd ..
+            ls -lh agent-v2-windows-deployment.zip
           fi
+
 
       - name: List build artifacts
         run: |
@@ -87,7 +97,8 @@ jobs:
           name: agent-v2-windows
           path: |
             dist/EverydayTechAgent-v2-win*
-            dist/helpers/win32/**
+            dist/agent-v2-windows-deployment.zip
+            dist/helpers/**
           retention-days: 30
 
       - name: Upload Linux build
