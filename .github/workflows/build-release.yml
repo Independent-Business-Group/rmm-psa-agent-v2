@@ -2,11 +2,11 @@ name: Build Agent v2
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,21 +16,21 @@ jobs:
   build:
     name: Build Agent v2 for Multiple Platforms
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      
+          node-version: "18"
+
       - name: Install dependencies
         run: |
           npm install
           npm install -g pkg
-      
+
       - name: Prepare dist directory
         run: |
           # Save install.bat from repository before cleaning dist
@@ -40,14 +40,14 @@ jobs:
           mkdir -p dist/helpers
           # Restore install.bat for packaging
           cp /tmp/install.bat dist/install.bat 2>/dev/null || echo "Using package.js generated install.bat"
-      
+
       - name: Build core agent
         run: |
           echo "Building core agent for all platforms..."
           pkg lib/start.js \
             --targets node18-win-x64,node18-linux-x64,node18-macos-x64 \
             --output dist/EverydayTechAgent-v2
-      
+
       - name: Build helpers
         run: |
           if [ -f scripts/build-helpers.js ]; then
@@ -57,7 +57,7 @@ jobs:
           else
             echo "Helper build script not found, skipping"
           fi
-      
+
       - name: Create distribution packages
         run: |
           if [ -f scripts/package.js ]; then
@@ -69,7 +69,7 @@ jobs:
             tar -czf agent-v2-linux.tar.gz EverydayTechAgent-v2-linux helpers/linux 2>/dev/null || true
             tar -czf agent-v2-macos.tar.gz EverydayTechAgent-v2-macos helpers/darwin 2>/dev/null || true
           fi
-      
+
       - name: List build artifacts
         run: |
           echo "Core executables:"
@@ -80,7 +80,7 @@ jobs:
           echo ""
           echo "Packages:"
           ls -lh dist/*.zip dist/*.tar.gz 2>/dev/null || true
-      
+
       - name: Upload Windows build
         uses: actions/upload-artifact@v4
         with:
@@ -89,7 +89,7 @@ jobs:
             dist/EverydayTechAgent-v2-win*
             dist/helpers/win32/**
           retention-days: 30
-      
+
       - name: Upload Linux build
         uses: actions/upload-artifact@v4
         with:
@@ -98,7 +98,7 @@ jobs:
             dist/EverydayTechAgent-v2-linux*
             dist/helpers/linux/**
           retention-days: 30
-      
+
       - name: Upload macOS build
         uses: actions/upload-artifact@v4
         with:
@@ -107,7 +107,7 @@ jobs:
             dist/EverydayTechAgent-v2-macos*
             dist/helpers/darwin/**
           retention-days: 30
-      
+
       - name: Upload distribution packages
         uses: actions/upload-artifact@v4
         if: always()
@@ -123,28 +123,28 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
-      
+
       - name: List downloaded artifacts
         run: |
           echo "Downloaded artifacts:"
           find artifacts -type f -ls
-      
+
       - name: Prepare release files
         run: |
           mkdir -p release-files
           find artifacts -type f \( -name "*.exe" -o -name "*.zip" -o -name "*.tar.gz" \) -exec cp {} release-files/ \;
           echo "Release files:"
           ls -lh release-files/
-      
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
