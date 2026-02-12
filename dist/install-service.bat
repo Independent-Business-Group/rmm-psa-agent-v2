@@ -14,14 +14,12 @@ if %errorLevel% neq 0 (
 )
 
 echo Installing Windows service...
-sc create "EverydayTech Agent v2" ^
-   binPath= "\"C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe\"" ^
-   DisplayName= "EverydayTech Agent v2" ^
-   Description= "EverydayTech RMM/PSA Agent v2 - Helper-based Architecture" ^
-   start= auto
+sc create "EverydayTech Agent v2" binPath= "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" DisplayName= "EverydayTech Agent v2" start= auto
 
 if %errorLevel% neq 0 (
-    echo ERROR: Failed to create service
+    echo ERROR: Failed to create service (Error code: %errorLevel%)
+    echo.
+    echo Try manually: sc create "EverydayTech Agent v2" binPath= "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" start= auto
     pause
     exit /b 1
 )
