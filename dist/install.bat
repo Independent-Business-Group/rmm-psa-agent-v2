@@ -14,6 +14,28 @@ if %errorLevel% neq 0 (
     exit /b 1
 )
 
+REM Check if source files exist
+echo Checking source files...
+if not exist "EverydayTechAgent-v2-win.exe" (
+    echo ERROR: EverydayTechAgent-v2-win.exe not found in current directory
+    echo Current directory: %CD%
+    echo.
+    echo Please make sure you:
+    echo 1. Extracted the agent-v2-windows-deployment.zip file
+    echo 2. Are running install.bat from the extracted folder
+    echo.
+    dir /B
+    pause
+    exit /b 1
+)
+
+if not exist "helpers" (
+    echo ERROR: helpers folder not found in current directory
+    echo Current directory: %CD%
+    pause
+    exit /b 1
+)
+
 echo Creating directories...
 mkdir "C:\Program Files\EverydayTech\Agent" 2>nul
 mkdir "C:\Program Files\EverydayTech\Agent\helpers" 2>nul
@@ -21,9 +43,11 @@ mkdir "C:\ProgramData\EverydayTech\logs" 2>nul
 mkdir "C:\ProgramData\EverydayTech\config" 2>nul
 
 echo Copying agent files...
+echo From: %CD%\EverydayTechAgent-v2-win.exe
+echo To: C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe
 copy /Y EverydayTechAgent-v2-win.exe "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe"
 if %errorLevel% neq 0 (
-    echo ERROR: Failed to copy agent executable
+    echo ERROR: Failed to copy agent executable (Error code: %errorLevel%)
     pause
     exit /b 1
 )
