@@ -62,40 +62,72 @@ if %errorLevel% neq 0 (
 
 echo Creating configuration file...
 if not exist "C:\ProgramData\EverydayTech\config\agent-v2.json" (
-    echo {> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "version": "2.0.0",>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "backendUrl": "https://everydaytech.au/api",>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "websocketUrl": "wss://everydaytech.au/api/agent/ws",>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "logLevel": "info",>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "helpers": {>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo     "timeout": 30000,>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo     "retryAttempts": 2,>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo     "enabled": ["rdp-helper-v2", "system-helper", "update-helper"]>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   },>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   "features": {>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo     "remoteDesktop": true,>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo     "systemInfo": true>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo   }>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-    echo }>> "C:\ProgramData\EverydayTech\config\agent-v2.json"
-)
-
-echo Testing helper applications...
-"C:\Program Files\EverydayTech\Agent\helpers\rdp-helper-v2.exe" --version
-if %errorLevel% neq 0 (
-    echo WARNING: RDP Helper may not work properly
-)
-
-"C:\Program Files\EverydayTech\Agent\helpers\system-helper.exe" --version  
-if %errorLevel% neq 0 (
-    echo WARNING: System Helper may not work properly
+    (
+        echo {
+        echo   "version": "2.0.0",
+        echo   "backendUrl": "https://everydaytech.au/api",
+        echo   "websocketUrl": "wss://everydaytech.au/api/agent/ws",
+        echo   "logLevel": "info",
+        echo   "helpers": {
+        echo     "timeout": 30000,
+        echo     "retryAttempts": 2,
+        echo     "enabled": ["rdp-helper-v2", "system-helper", "update-helper"]
+        echo   },
+        echo   "features": {
+        echo     "remoteDesktop": true,
+        echo     "systemInfo": true
+        echo   }
+        echo }
+    ) > "C:\ProgramData\EverydayTech\config\agent-v2.json"
+    echo Configuration file created
+) else (
+    echo Configuration file already exists, skipping
 )
 
 echo.
+echo Installing Windows service...
+"C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" --install-service
+if %errorLevel% neq 0 (
+    echo ERROR: Failed to install Windows service
+    echo This usually means the service is already installed
+    echo Try: sc delete "EverydayTech Agent v2"
+    echo Then run this installer again
+    pause
+    exit /b 1
+)
+echo Service installed successfully
+
+echo.
+echo Starting Windows service...
+net start "EverydayTech Agent v2"
+if %errorLevel% neq 0 (
+    echo ERROR: Failed to start service
+    echo Check logs: C:\ProgramData\EverydayTech\logs\agent-v2.log
+    pause
+    exit /b 1
+)
+
+echo.
+echo Verifying service status...
+sc query "EverydayTech Agent v2" | find "RUNNING"
+if %errorLevel% equ 0 (
+    echo ✓ Service is RUNNING
+) else (
+    echo WARNING: Service may not be running properly
+    sc query "EverydayTech Agent v2"
+)
+
+echo.
+echo ========================================
 echo Installation completed successfully!
+echo ========================================
 echo.
-echo Next steps:
-echo 1. Configure the backend URL in C:\ProgramData\EverydayTech\config\agent-v2.json
-echo 2. Run install-service.bat to install the Windows service
-echo 3. Test remote desktop functionality
+echo Service: EverydayTech Agent v2
+echo Status: Running
+echo Config: C:\ProgramData\EverydayTech\config\agent-v2.json
+echo Logs: C:\ProgramData\EverydayTech\logs\agent-v2.log
+echo.
+echo The agent will automatically connect to https://everydaytech.au/api
+echo Check the dashboard to see this agent appear
 echo.
 pause
