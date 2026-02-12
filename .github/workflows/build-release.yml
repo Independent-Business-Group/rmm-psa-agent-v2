@@ -63,7 +63,7 @@ jobs:
           # Create deployment package with installer scripts
           cd dist
           mkdir -p deployment
-          
+
           # Copy Windows deployment files
           if [ -f EverydayTechAgent-v2-win.exe ]; then
             cp EverydayTechAgent-v2-win.exe deployment/
@@ -78,7 +78,6 @@ jobs:
             cd ..
             ls -lh agent-v2-windows-deployment.zip
           fi
-
 
       - name: List build artifacts
         run: |
