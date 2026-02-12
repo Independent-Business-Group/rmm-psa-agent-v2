@@ -222,16 +222,49 @@ class UpdateHelperV2 {
   
   async fetchUpdateInfo(version = 'latest') {
     return new Promise((resolve, reject) => {
-      const url = `${this.updateUrl}/${version}?platform=${this.platform}&arch=${this.arch}`;
+      // GitHub API endpoint - already set to releases/latest
+      const url = this.updateUrl;
       
-      https.get(url, (res) => {
+      const options = {
+        headers: {
+          'User-Agent': 'EverydayTechAgent-v2',
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      };
+      
+      https.get(url, options, (res) => {
         let data = '';
         res.on('data', chunk => data += chunk);
         res.on('end', () => {
           try {
-            resolve(JSON.parse(data));
+            const release = JSON.parse(data);
+            
+            // Transform GitHub release format to our expected format
+            const updateInfo = {
+              version: release.tag_name || release.name,
+              name: release.name,
+              published: release.published_at,
+              notes: release.body,
+              downloads: {},
+              assets: release.assets
+            };
+            
+            // Map assets to platform keys
+            for (const asset of release.assets || []) {
+              const name = asset.name.toLowerCase();
+              if (name.includes('windows') || name.includes('win')) {
+                updateInfo.downloads['win32-x64'] = asset.browser_download_url;
+              } else if (name.includes('linux')) {
+                updateInfo.downloads['linux-x64'] = asset.browser_download_url;
+              } else if (name.includes('macos') || name.includes('darwin')) {
+                updateInfo.downloads['darwin-x64'] = asset.browser_download_url;
+                updateInfo.downloads['darwin-arm64'] = asset.browser_download_url;
+              }
+            }
+            
+            resolve(updateInfo);
           } catch (e) {
-            reject(new Error('Invalid update info response'));
+            reject(new Error(`Invalid GitHub API response: ${e.message}`));
           }
         });
       }).on('error', reject);
