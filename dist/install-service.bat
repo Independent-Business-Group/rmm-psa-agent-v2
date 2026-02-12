@@ -13,24 +13,18 @@ if %errorLevel% neq 0 (
     exit /b 1
 )
 
-echo Installing Windows service...
-sc create "EverydayTech Agent v2" binPath= "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" DisplayName= "EverydayTech Agent v2" start= auto
+echo Installing Windows service using node-windows wrapper...
+echo.
+
+REM Use the agent executable to run itself as a service wrapper
+"C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" --service-install
 
 if %errorLevel% neq 0 (
-    echo ERROR: Failed to create service (Error code: %errorLevel%)
+    echo ERROR: Failed to install service (Error code: %errorLevel%)
     echo.
-    echo Try manually: sc create "EverydayTech Agent v2" binPath= "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe" start= auto
+    echo The agent must include node-windows service wrapper support.
     pause
     exit /b 1
-)
-
-echo Starting service...
-net start "EverydayTech Agent v2"
-
-if %errorLevel% neq 0 (
-    echo WARNING: Service failed to start. Check the logs in C:\ProgramData\EverydayTech\logs\
-) else (
-    echo Service started successfully!
 )
 
 echo.
