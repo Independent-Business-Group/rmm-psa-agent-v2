@@ -78,6 +78,9 @@ jobs:
             cd ..
             ls -lh agent-v2-windows-deployment.zip
           fi
+          
+          # Copy bootstrap installer to root for standalone download
+          cp bootstrap-install.bat . 2>/dev/null || echo "No bootstrap installer"
 
       - name: List build artifacts
         run: |
@@ -97,6 +100,7 @@ jobs:
           path: |
             dist/EverydayTechAgent-v2-win*
             dist/agent-v2-windows-deployment.zip
+            dist/bootstrap-install.bat
             dist/helpers/**
           retention-days: 30
 

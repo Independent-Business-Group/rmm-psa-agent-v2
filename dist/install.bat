@@ -48,7 +48,6 @@ echo To: C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe
 copy /Y EverydayTechAgent-v2-win.exe "C:\Program Files\EverydayTech\Agent\EverydayTechAgent-v2.exe"
 if %errorLevel% neq 0 (
     echo ERROR: Failed to copy agent executable (Error code: %errorLevel%)
-    pause
     exit /b 1
 )
 
